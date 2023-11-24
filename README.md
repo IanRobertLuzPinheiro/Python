@@ -10,5 +10,5 @@
   
   **Estruturação do repositório:**
   
-    Primeiro há as pastas por semana. Em seguida há as pastas por instrução prática.
+    Primeiro há as pastas por semana. Em seguida há as pastas por instrução prática de cada integrante.
 
