@@ -1,0 +1,3 @@
+9,Beber,True,
+8,Comer,False,
+10,Fazer atividade,False,
