@@ -8,7 +8,7 @@
 
   Marcos Vinícius Tavares Gomes - mvtgomes.ege@uesc.br
   
-  Estruturação do repositório:
+  **Estruturação do repositório:**
   
     Primeiro há as pastas por semana. Em seguida há as pastas por instrução prática.
 
