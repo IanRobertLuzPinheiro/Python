@@ -4,7 +4,7 @@
 
   Ian Robert Luz Pinheiro - irlpinheiro.ege@uesc.br
 
-  Laio Rodrigues - lrodrigues.ege@uesc.br
+  Laio Rodrigues - rlaio.ege@gmail.com
 
   Marcos Vinícius Tavares Gomes - mvtgomes.ege@uesc.br
   
