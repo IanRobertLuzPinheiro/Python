@@ -13,7 +13,7 @@ def registrar():
     print("Tarefa registrada!")
 
 def marcar():
-    listar_tarefas()
+    listar()
     try:
         id_tarefa = int(input("Digite o ID da tarefa a ser marcada como realizada: ")) - 1
         if 0 <= id_tarefa < len(tarefas):
@@ -63,3 +63,5 @@ def main():
             break
         else:
             print("Opção inválida!!")
+if __name__ == "__main__":
+    main()
