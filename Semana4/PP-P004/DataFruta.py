@@ -1,5 +1,6 @@
 
 from abc import ABC, abstractmethod
+import numpy as np
 
 class Data:
     
@@ -73,23 +74,6 @@ class Data:
                 if self.__dia > outraData.__dia:
                     return True
         return False
-    
-	
-	
-	Data (int _dia, int _mes, int _ano) {
-		dia = _dia;
-		mes = _mes;
-		ano = _ano;
-	}
-	string toString() {
-		string ret = "";
-		ret.append(to_string(dia));
-		ret.append("/");
-		ret.append(to_string(mes));
-		ret.append("/");
-		ret.append(to_string(ano));
-		return ret;
-	}
 
 class AnaliseDados(ABC): 
 
@@ -120,34 +104,30 @@ class ListaNomes(AnaliseDados):
         self.__lista = []        
 
     def entradaDeDados(self):
-        '''
-        Este método pergunta ao usuários quantos
-        elementos vão existir na lista e depois
-        solicita a digitação de cada um deles.
-        '''
-        pass
+        try:
+            num_elementos = int(input("Quantos elementos na lista de nomes? "))
+            for i in range(num_elementos):
+                print("")
+                print(f"Informe o {i+1}º nome!")
+                nome = input("-> ")
+                self.__lista.append(nome)
+            print("")
+            self.__lista.sort()
+        except ValueError:
+            print("Entrada inválida. Por favor, insira um número inteiro.")
 
     def mostraMediana(self):
-        '''
-        Este método ordena a lista e mostra o
-        elemento que está na metade da lista
-        '''
-        pass    
+        print(f"Mediana: {self.__lista[len(self.__lista)//2 - 1]}")
 
     def mostraMenor(self):
-        '''
-        Este método retorna o menos elemento da lista
-        '''
-        pass
+        print(f"Menor: {self.__lista[0]}")
 
     def mostraMaior(self):
-        '''
-        Este método retorna o maior elemento da lista
-        '''
-        pass    
+        print(f"Maior: {self.__lista[len(self.__lista)-1]}")
 
     def __str__(self):
-        pass
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")
 	
 class ListaDatas(AnaliseDados):
         
@@ -156,34 +136,33 @@ class ListaDatas(AnaliseDados):
         self.__lista = []        
     
     def entradaDeDados(self):
-        '''
-        Este método pergunta ao usuários quantos
-        elementos vão existir na lista e depois
-        solicita a digitação de cada um deles
-        '''
-        pass
+        try:
+            num_elementos = int(input("Quantos elementos na lista de datas? "))
+            for i in range(num_elementos):
+                print("")
+                print(f"Informe a {i+1}ª data!")
+                dia = int(input("Digite o dia: "))
+                mes = int(input("Digite o mês: "))
+                ano = int(input("Digite o ano: "))
+                nova_data = Data(dia, mes, ano)
+                self.__lista.append(nova_data)
+            print("")
+            self.__lista.sort()
+        except ValueError as e:
+            print(f"Entrada inválida: {e}. Por favor, insira valores numéricos válidos.")
     
     def mostraMediana(self):
-        '''
-        Este método ordena a lista e mostra o
-        elemento que está na metade da lista
-        '''
-        pass    
-     
+        print(f"Mediana: {self.__lista[len(self.__lista)//2 - 1]}")
+
     def mostraMenor(self):
-        '''
-        Este método retorna o menos elemento da lista
-        '''
-        pass
-    
+        print(f"Menor: {self.__lista[0]}")
+
     def mostraMaior(self):
-        '''
-        Este método retorna o maior elemento da lista
-        '''
-        pass
-    
+        print(f"Maior: {self.__lista[len(self.__lista)-1]}")
+
     def __str__(self):
-        pass
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")
 
 class ListaSalarios(AnaliseDados):
 
@@ -192,34 +171,30 @@ class ListaSalarios(AnaliseDados):
         self.__lista = []        
 
     def entradaDeDados(self):
-        '''
-        Este método pergunta ao usuários quantos
-        elementos vão existir na lista e depois
-        solicita a digitação de cada um deles
-        '''
-        pass
+        try:
+            num_elementos = int(input("Quantos elementos na lista de salários? "))
+            for i in range(num_elementos):
+                print("")
+                print(f"Informe o {i+1}º salário!")
+                salario = float(input("-> "))
+                self.__lista.append(salario)
+            self.__lista.sort()
+            print("")
+        except ValueError:
+            print("Entrada inválida. Por favor, insira um número.")
 
     def mostraMediana(self):
-        '''
-        Este método ordena a lista e mostra o
-        elemento que está na metade da lista
-        '''
-        pass    
+        print(f"Mediana: {np.median(self.__lista)}")
 
     def mostraMenor(self):
-        '''
-        Este método retorna o menos elemento da lista
-        '''
-        pass
+        print(f"Menor: {self.__lista[0]}")
 
     def mostraMaior(self):
-        '''
-        Este método retorna o maior elemento da lista
-        '''
-        pass
-    
+        print(f"Maior: {self.__lista[len(self.__lista)-1]}")
+
     def __str__(self):
-        pass
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")
 
 class ListaIdades(AnaliseDados):
     
@@ -228,34 +203,30 @@ class ListaIdades(AnaliseDados):
         self.__lista = []        
     
     def entradaDeDados(self):
-        '''
-        Este método pergunta ao usuários quantos
-        elementos vão existir na lista e depois
-        solicita a digitação de cada um deles
-        '''
-        pass
-    
+        try:
+            num_elementos = int(input("Quantos elementos na lista de idades? "))
+            for i in range(num_elementos):
+                print("")
+                print(f"Informe a {i+1}ª idade!")
+                idade = int(input("-> "))
+                self.__lista.append(idade)
+            self.__lista.sort()
+            print("")
+        except ValueError:
+            print("Entrada inválida. Por favor, insira um número inteiro.")
+
     def mostraMediana(self):
-        '''
-        Este método ordena a lista e mostra o
-        elemento que está na metade da lista
-        '''
-        pass    
-    
+        print(f"Mediana: {np.median(self.__lista)}")
+
     def mostraMenor(self):
-        '''
-        Este método retorna o menos elemento da lista
-        '''
-        pass
-    
+        print(f"Menor: {self.__lista[0]}")
+
     def mostraMaior(self):
-        '''
-        Este método retorna o maior elemento da lista
-        '''
-        pass
+        print(f"Maior: {self.__lista[len(self.__lista)-1]}")
 
     def __str__(self):
-        pass
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")
 
 def main():
     nomes = ListaNomes()
