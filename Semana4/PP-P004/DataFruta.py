@@ -253,7 +253,12 @@ def NomeESalario(self):
     print("Lista de Nomes e Salários:")
     for nome, salario in zip(self.lista, ListaSalarios.lista):
         print(f"Nome: {nome}, Salário: {salario:.2f}")
-        
+def calculaCustoFolha(self):
+        salarios_reajustados = map(lambda salario: salario * 1.1, self.__lista)
+        custo_total = sum(salarios_reajustados)
+
+        print(f"Total Custo do pagamento, aplicando um reajuste médio de 10%: {custo_total}")        
+
 def main():
     nomes = ListaNomes()
     datas = ListaDatas()
