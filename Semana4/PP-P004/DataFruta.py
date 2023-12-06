@@ -137,6 +137,9 @@ class ListaNomes(AnaliseDados):
         print("Lista ordenada:")
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
+    def mostraNomeESalario(self, lista_salarios):
+        for nome, salario in zip(self.__lista, lista_salarios):
+            print(f"Nome: {nome}, Salário: {salario}")        
 	
 class ListaDatas(AnaliseDados):
         
@@ -175,8 +178,15 @@ class ListaDatas(AnaliseDados):
     def listar(self):
         print("Lista ordenada:")
         for id, item in enumerate(self.__lista):
-            print(f"{id+1}: {item}")        
+            print(f"{id+1}: {item}") 
+    def ajustaDatas(self):
+        datas_anteriores_2019 = filter(lambda data: data.ano < 2019, self.lista)
+        for data in datas_anteriores_2019:
+            data.dia = 1
 
+    def mostraDatasAjustadas(self):
+        for data in self.lista:
+            print(data)        
 class ListaSalarios(AnaliseDados):
 
     def __init__(self):
@@ -211,7 +221,12 @@ class ListaSalarios(AnaliseDados):
     def listar(self):
         print("Lista ordenada:")
         for id, item in enumerate(self.__lista):
-            print(f"{id+1}: {item}")        
+            print(f"{id+1}: {item}") 
+    def calculaCustoFolha(self):
+        salarios_reajustados = map(lambda salario: salario * 1.1, self.__lista)
+        custo_total = sum(salarios_reajustados)
+
+        print(f"Total Custo do pagamento, aplicando um reajuste médio de 10%: {custo_total}")                
 
 class ListaIdades(AnaliseDados):
     
@@ -249,15 +264,7 @@ class ListaIdades(AnaliseDados):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")        
 
-def NomeESalario(self):
-    print("Lista de Nomes e Salários:")
-    for nome, salario in zip(self.lista, ListaSalarios.lista):
-        print(f"Nome: {nome}, Salário: {salario:.2f}")
-def calculaCustoFolha(self):
-        salarios_reajustados = map(lambda salario: salario * 1.1, self.__lista)
-        custo_total = sum(salarios_reajustados)
 
-        print(f"Total Custo do pagamento, aplicando um reajuste médio de 10%: {custo_total}")        
 
 def main():
     nomes = ListaNomes()
