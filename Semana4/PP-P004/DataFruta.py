@@ -98,15 +98,6 @@ class AnaliseDados(ABC):
     @abstractmethod
     def mostraMaior(self):
         pass
-    @abstractmethod
-    def listar(self):
-        pass
-
-
-    @abstractmethod
-    def listarEmOrdem(self):
-        pass
-
 
     @abstractmethod
     def listarEmOrdem(self):
@@ -119,6 +110,10 @@ class ListaNomes(AnaliseDados):
         super().__init__(type("String"))
         self.__lista = []        
 
+    @property
+    def lista(self):
+        return self.__lista
+    
     def entradaDeDados(self):
         try:
             num_elementos = int(input("Quantos elementos na lista de nomes? "))
@@ -200,7 +195,7 @@ class ListaDatas(AnaliseDados):
         print("")
     
     def ajustaDatas(self):
-        datas_anteriores_2019 = filter(lambda data: data.ano < 2019, self.lista)
+        datas_anteriores_2019 = filter(lambda data: data.ano < 2019, self.__lista)
 
         for data in datas_anteriores_2019:
             data.dia = 1
@@ -217,6 +212,10 @@ class ListaSalarios(AnaliseDados):
     def __init__(self):
         super().__init__(type(float))
         self.__lista = []        
+
+    @property
+    def lista(self):
+        return self.__lista
 
     def entradaDeDados(self):
         try:
@@ -316,10 +315,14 @@ class ListaIdades(AnaliseDados):
     def __str__(self):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
-    def listar(self):
+    
+    def listarEmOrdem(self):
         print("Lista ordenada:")
         for id, item in enumerate(self.__lista):
-            print(f"{id+1}: {item}")        
+            print(f"{id+1}: {item}")  
+
+    def incluirIdade(self, idade):
+        self.__lista.append(idade)   
 
 def exibir_menu():
     print("Menu de Opções:")
@@ -332,33 +335,11 @@ def exibir_menu():
     print("7. Modificar o dia das datas anteriores a 2019")
     print("8. Sair")
 
-    def listarEmOrdem(self):
-        print("Lista de Idades em Ordem:")
-        for id, item in enumerate(self.__lista):
-            print(f"{id+1}: {item}")
-        print("")
-
-    def incluirIdade(self, idade):
-        self.__lista.append(idade)
-
-
-    def listarEmOrdem(self):
-        print("Lista de Idades em Ordem:")
-        for id, item in enumerate(self.__lista):
-            print(f"{id+1}: {item}")
-        print("")
-
-    def incluirIdade(self, idade):
-        self.__lista.append(idade)
-
-
 def main():
     nomes = ListaNomes()
     datas = ListaDatas()
     salarios = ListaSalarios()
     idades = ListaIdades()
-
-    listaListas = [nomes, datas, salarios, idades]
 
     while True:
         exibir_menu()
@@ -373,7 +354,7 @@ def main():
                 salarios.incluirSalario(salario)
             case "3":
                 try:
-                    print(f"Informe a {i+1}ª data!")
+                    print(f"Informe a data!")
                     dia = int(input("Digite o dia: "))
                     mes = int(input("Digite o mês: "))
                     ano = int(input("Digite o ano: "))
@@ -385,12 +366,11 @@ def main():
                 idade = int(input("Digite uma idade: "))
                 idades.incluirIdade(idade)
             case "5":
-                nomes.mostraNomeESalario(salarios)
+                nomes.mostraNomeESalario(salarios.lista)
             case "6":
                 salarios.calculaCustoFolha()
             case "7":
                 datas.ajustaDatas()
-                datas.mostraDatas()
             case "8":
                 print("Saindo do programa.")
                 break
