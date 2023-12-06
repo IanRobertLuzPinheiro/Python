@@ -201,7 +201,7 @@ class ListaDatas(AnaliseDados):
             data.dia = 1
 
     def mostraDatasAjustadas(self):
-        for data in self.lista:
+        for data in self.__lista:
             print(data)
 
     def incluirData(self, data):
@@ -245,7 +245,8 @@ class ListaSalarios(AnaliseDados):
     def listar(self):
         print("Lista ordenada:")
         for id, item in enumerate(self.__lista):
-            print(f"{id+1}: {item}") 
+            print(f"{id+1}: {item}")
+             
     def calculaCustoFolha(self):
         salarios_reajustados = map(lambda salario: salario * 1.1, self.__lista)
         custo_total = sum(salarios_reajustados)
@@ -371,6 +372,7 @@ def main():
                 salarios.calculaCustoFolha()
             case "7":
                 datas.ajustaDatas()
+                datas.mostraDatasAjustadas()
             case "8":
                 print("Saindo do programa.")
                 break
