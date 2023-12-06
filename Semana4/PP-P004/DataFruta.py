@@ -74,6 +74,8 @@ class Data:
                 if self.__dia > outraData.__dia:
                     return True
         return False
+    
+
 
 class AnaliseDados(ABC): 
 
@@ -96,6 +98,11 @@ class AnaliseDados(ABC):
     @abstractmethod
     def mostraMaior(self):
         pass
+
+    @abstractmethod
+    def listarEmOrdem(self):
+        pass
+
 
 class ListaNomes(AnaliseDados):
     
@@ -128,6 +135,19 @@ class ListaNomes(AnaliseDados):
     def __str__(self):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
+    
+    def listarEmOrdem(self):
+        print("Lista de Nomes em Ordem:")
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")
+        print("")
+
+    def mostraNomeESalario(self, lista_salarios):
+        for nome, salario in zip(self.__lista, lista_salarios):
+            print(f"Nome: {nome}, Salário: {salario}")
+
+    def incluirNome(self, nome):
+        self.__lista.append(nome)
 	
 class ListaDatas(AnaliseDados):
         
@@ -164,6 +184,25 @@ class ListaDatas(AnaliseDados):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
 
+    def listarEmOrdem(self):
+        print("Lista de Datas em Ordem:")
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")
+        print("")
+    
+    def ajustaDatas(self):
+        datas_anteriores_2019 = filter(lambda data: data.ano < 2019, self.lista)
+
+        for data in datas_anteriores_2019:
+            data.dia = 1
+
+    def mostraDatasAjustadas(self):
+        for data in self.lista:
+            print(data)
+
+    def incluirData(self, data):
+        self.__lista.append(data)
+
 class ListaSalarios(AnaliseDados):
 
     def __init__(self):
@@ -195,6 +234,22 @@ class ListaSalarios(AnaliseDados):
     def __str__(self):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
+
+    def listarEmOrdem(self):
+            print("Lista de Salários em Ordem:")
+            for id, item in enumerate(self.__lista):
+                print(f"{id+1}: {item}")
+            print("")
+    
+    def calculaCustoFolha(self):
+        salarios_reajustados = map(lambda salario: salario * 1.1, self.__lista)
+
+        custo_total = sum(salarios_reajustados)
+
+        print(f"Custo total da folha de pagamento com reajuste de 10%: {custo_total}")
+
+    def incluirSalario(self, salario):
+        self.__lista.append(salario)
 
 class ListaIdades(AnaliseDados):
     
@@ -228,6 +283,16 @@ class ListaIdades(AnaliseDados):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
 
+    def listarEmOrdem(self):
+        print("Lista de Idades em Ordem:")
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")
+        print("")
+
+    def incluirIdade(self, idade):
+        self.__lista.append(idade)
+
+
 def main():
     nomes = ListaNomes()
     datas = ListaDatas()
@@ -241,6 +306,7 @@ def main():
         lista.mostraMediana()
         lista.mostraMenor()
         lista.mostraMaior()
+        lista.listarEmOrdem()  # Novo método
         print("___________________")
 
     print("Fim do teste!!!")
