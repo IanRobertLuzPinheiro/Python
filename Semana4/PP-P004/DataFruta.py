@@ -99,7 +99,7 @@ class AnaliseDados(ABC):
     @abstractmethod
     def listar(self):
         pass
-    
+
 
 class ListaNomes(AnaliseDados):
     
@@ -130,6 +130,11 @@ class ListaNomes(AnaliseDados):
         print(f"Maior: {self.__lista[len(self.__lista)-1]}")
 
     def __str__(self):
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")
+
+    def listar(self):
+        print("Lista ordenada:")
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
 	
@@ -167,6 +172,10 @@ class ListaDatas(AnaliseDados):
     def __str__(self):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
+    def listar(self):
+        print("Lista ordenada:")
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")        
 
 class ListaSalarios(AnaliseDados):
 
@@ -199,6 +208,10 @@ class ListaSalarios(AnaliseDados):
     def __str__(self):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
+    def listar(self):
+        print("Lista ordenada:")
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")        
 
 class ListaIdades(AnaliseDados):
     
@@ -231,6 +244,10 @@ class ListaIdades(AnaliseDados):
     def __str__(self):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
+    def listar(self):
+        print("Lista ordenada:")
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")        
 
 def main():
     nomes = ListaNomes()
