@@ -96,6 +96,10 @@ class AnaliseDados(ABC):
     @abstractmethod
     def mostraMaior(self):
         pass
+    @abstractmethod
+    def listar(self):
+        pass
+    
 
 class ListaNomes(AnaliseDados):
     
