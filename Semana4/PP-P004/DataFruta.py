@@ -98,6 +98,15 @@ class AnaliseDados(ABC):
     @abstractmethod
     def mostraMaior(self):
         pass
+    @abstractmethod
+    def listar(self):
+        pass
+
+
+    @abstractmethod
+    def listarEmOrdem(self):
+        pass
+
 
     @abstractmethod
     def listarEmOrdem(self):
@@ -234,6 +243,31 @@ class ListaSalarios(AnaliseDados):
     def __str__(self):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
+    def listar(self):
+        print("Lista ordenada:")
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}") 
+    def calculaCustoFolha(self):
+        salarios_reajustados = map(lambda salario: salario * 1.1, self.__lista)
+        custo_total = sum(salarios_reajustados)
+
+        print(f"Total Custo do pagamento, aplicando um reajuste médio de 10%: {custo_total}")                
+
+    def listarEmOrdem(self):
+            print("Lista de Salários em Ordem:")
+            for id, item in enumerate(self.__lista):
+                print(f"{id+1}: {item}")
+            print("")
+    
+    def calculaCustoFolha(self):
+        salarios_reajustados = map(lambda salario: salario * 1.1, self.__lista)
+
+        custo_total = sum(salarios_reajustados)
+
+        print(f"Custo total da folha de pagamento com reajuste de 10%: {custo_total}")
+
+    def incluirSalario(self, salario):
+        self.__lista.append(salario)
 
     def listarEmOrdem(self):
             print("Lista de Salários em Ordem:")
@@ -282,6 +316,31 @@ class ListaIdades(AnaliseDados):
     def __str__(self):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")
+    def listar(self):
+        print("Lista ordenada:")
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")        
+
+def exibir_menu():
+    print("Menu de Opções:")
+    print("1. Incluir um nome na lista de nomes")
+    print("2. Incluir um salário na lista de salários")
+    print("3. Incluir uma data na lista de datas")
+    print("4. Incluir uma idade na lista de idades")
+    print("5. Percorrer as listas de nomes e salários")
+    print("6. Calcular o valor da folha com um reajuste de 10%")
+    print("7. Modificar o dia das datas anteriores a 2019")
+    print("8. Sair")
+
+    def listarEmOrdem(self):
+        print("Lista de Idades em Ordem:")
+        for id, item in enumerate(self.__lista):
+            print(f"{id+1}: {item}")
+        print("")
+
+    def incluirIdade(self, idade):
+        self.__lista.append(idade)
+
 
     def listarEmOrdem(self):
         print("Lista de Idades em Ordem:")
@@ -301,15 +360,42 @@ def main():
 
     listaListas = [nomes, datas, salarios, idades]
 
-    for lista in listaListas:
-        lista.entradaDeDados()
-        lista.mostraMediana()
-        lista.mostraMenor()
-        lista.mostraMaior()
-        lista.listarEmOrdem()  # Novo método
-        print("___________________")
+    while True:
+        exibir_menu()
+        opcao = input("Escolha uma opção (1-8): ")
 
-    print("Fim do teste!!!")
+        match(opcao):
+            case "1":
+                nome = input("Digite um nome: ")
+                nomes.incluirNome(nome)
+            case "2":
+                salario = float(input("Digite um salário: "))
+                salarios.incluirSalario(salario)
+            case "3":
+                try:
+                    print(f"Informe a {i+1}ª data!")
+                    dia = int(input("Digite o dia: "))
+                    mes = int(input("Digite o mês: "))
+                    ano = int(input("Digite o ano: "))
+                    nova_data = Data(dia, mes, ano)
+                    datas.incluirData(nova_data)
+                except:
+                    print("Entrada inválida. Por favor, insira um número inteiro.")
+            case "4":
+                idade = int(input("Digite uma idade: "))
+                idades.incluirIdade(idade)
+            case "5":
+                nomes.mostraNomeESalario(salarios)
+            case "6":
+                salarios.calculaCustoFolha()
+            case "7":
+                datas.ajustaDatas()
+                datas.mostraDatas()
+            case "8":
+                print("Saindo do programa.")
+                break
+            case _:
+                print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
     main()
