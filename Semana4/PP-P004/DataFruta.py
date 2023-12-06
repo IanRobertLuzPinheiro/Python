@@ -249,6 +249,11 @@ class ListaIdades(AnaliseDados):
         for id, item in enumerate(self.__lista):
             print(f"{id+1}: {item}")        
 
+def NomeESalario(self):
+    print("Lista de Nomes e Salários:")
+    for nome, salario in zip(self.lista, ListaSalarios.lista):
+        print(f"Nome: {nome}, Salário: {salario:.2f}")
+        
 def main():
     nomes = ListaNomes()
     datas = ListaDatas()
